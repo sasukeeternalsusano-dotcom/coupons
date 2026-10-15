@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Danya's Coupon Book</title><style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#fde8f0;--card:#fff;--ink:#4a2108;--sub:#8a4a24;--acc:#e8407e;--line:#f3a9c4;--g:#cc5500}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a1208;--card:#3b1d10;--ink:#ffe9f2;--sub:#f5c2b0;--line:#7a3a1a;--acc:#ff7aa8;--g:#ff9a4d}}
+:root[data-theme="dark"]{--bg:#2a1208;--card:#3b1d10;--ink:#ffe9f2;--sub:#f5c2b0;--line:#7a3a1a;--acc:#ff7aa8;--g:#ff9a4d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nunito","Avenir Next","Trebuchet MS",sans-serif;line-height:1.45}
+.fl{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}.fl svg{position:absolute;bottom:-100px;width:36px;height:62px;opacity:.6;animation:rise 17s linear infinite}.fl svg:nth-child(1){left:4%;animation-delay:0s;width:34px}.fl svg:nth-child(2){left:16%;animation-delay:5s;width:44px}.fl svg:nth-child(3){left:28%;animation-delay:9s;width:38px}.fl svg:nth-child(4){left:40%;animation-delay:2s;width:40px}.fl svg:nth-child(5){left:52%;animation-delay:12s;width:36px}.fl svg:nth-child(6){left:63%;animation-delay:7s;width:46px}.fl svg:nth-child(7){left:74%;animation-delay:14s;width:38px}.fl svg:nth-child(8){left:85%;animation-delay:3s;width:42px}.fl svg:nth-child(9){left:94%;animation-delay:10s;width:34px}
+.w{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:0 16px 80px}
+header{min-height:60vh;display:flex;flex-direction:column;justify-content:center;text-align:center}
+h1{font-size:2.3rem;line-height:1.12;margin:0 0 10px;background:linear-gradient(90deg,var(--acc),var(--g));-webkit-background-clip:text;background-clip:text;color:transparent;animation:pop 1s cubic-bezier(.2,1.5,.4,1) both}
+header p{margin:0;color:var(--sub);animation:fade 1.2s .5s both}.hint{margin-top:28px;color:var(--acc);font-weight:800;animation:bob 1.6s ease-in-out infinite}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:8px 0 10px;text-align:center;font-weight:800;color:var(--g)}
+.bar div{height:8px;border-radius:8px;background:var(--line);margin-top:6px;overflow:hidden}.bar b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--g));transition:width .5s}
+.cp{position:relative;background:var(--card);border:2px dashed var(--acc);border-radius:18px;padding:16px 16px 16px 64px;margin:0 0 22px;box-shadow:0 4px 16px #4a210822;overflow:hidden}
+.cp:before,.cp:after{content:"";position:absolute;left:50px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:2px dashed var(--acc)}.cp:before{top:-11px}.cp:after{bottom:-11px}
+.num{position:absolute;left:0;top:0;bottom:0;width:50px;display:flex;align-items:center;justify-content:center;border-right:2px dashed var(--acc);font-weight:900;font-size:1.4rem;color:var(--acc)}
+.cp h2{font-size:1.1rem;margin:0 0 4px;color:var(--g)}.cp p{margin:0 0 12px;color:var(--sub);font-size:.95rem}
+.rd{border:0;border-radius:999px;background:var(--acc);color:#fff;font:inherit;font-weight:800;padding:9px 18px;cursor:pointer;transition:transform .15s}.rd:active{transform:scale(.94)}
+.js .cp{opacity:0;transform:translateY(34px) rotate(-1deg);transition:opacity .7s,transform .7s cubic-bezier(.2,1,.3,1)}.js .cp:nth-of-type(even){transform:translateY(34px) rotate(1deg)}.js .cp.in{opacity:1;transform:none}
+.cp.done{opacity:.75}.cp.done .rd{background:var(--g)}
+.st{position:absolute;right:12px;top:10px;border:3px solid var(--g);color:var(--g);border-radius:8px;padding:2px 10px;font-weight:900;letter-spacing:.1em;transform:rotate(-12deg) scale(0);opacity:0}.cp.done .st{animation:stamp .5s cubic-bezier(.2,1.6,.4,1) forwards}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-weight:700;opacity:0;transition:.4s;z-index:20;max-width:90%;text-align:center}.toast.on{opacity:1;transform:translate(-50%,0)}
+.end{text-align:center;color:var(--sub);padding:20px 0}.end b{display:block;font-size:1.4rem;color:var(--acc);animation:beat 1.4s ease-in-out infinite}
+@keyframes pop{0%{opacity:0;transform:scale(.85) translateY(14px)}100%{opacity:1;transform:none}}@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes rise{0%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-60vh) rotate(8deg)}100%{transform:translateY(-125vh) rotate(-6deg)}}@keyframes stamp{0%{transform:rotate(-12deg) scale(2.5);opacity:0}100%{transform:rotate(-12deg) scale(1);opacity:1}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.cp.done .st{transform:rotate(-12deg) scale(1);opacity:1}}
+</style><script>document.documentElement.classList.add("js")</script></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="tu" viewBox="0 0 40 80"><path d="M20 38V78" stroke="#c46a2a" stroke-width="3" stroke-linecap="round"/><path d="M20 72C8 68 6 56 8 50c8 4 12 12 12 22z" fill="#c46a2a"/><path d="M8 12c0 18 6 28 12 28s12-10 12-28c-4 6-8 2-12-4-4 6-8 10-12 4z" fill="#ff6f9c"/><path d="M14 14c0 14 3 24 6 26 3-2 6-12 6-26-3 4-5 0-6-6-1 6-3 10-6 6z" fill="#ffa3c1"/></symbol><symbol id="li" viewBox="0 0 60 80"><path d="M30 34V78" stroke="#c46a2a" stroke-width="3" stroke-linecap="round"/><path d="M30 70C18 66 14 56 16 50c10 4 14 12 14 20z" fill="#c46a2a"/><g transform="translate(30 30)"><g fill="#ffc9db" stroke="#ff7aa8" stroke-width=".8"><path d="M0 0C-8-9-7-21 0-28 7-21 8-9 0 0z" transform="rotate(0)"/><path d="M0 0C-8-9-7-21 0-28 7-21 8-9 0 0z" transform="rotate(60)"/><path d="M0 0C-8-9-7-21 0-28 7-21 8-9 0 0z" transform="rotate(120)"/><path d="M0 0C-8-9-7-21 0-28 7-21 8-9 0 0z" transform="rotate(180)"/><path d="M0 0C-8-9-7-21 0-28 7-21 8-9 0 0z" transform="rotate(240)"/><path d="M0 0C-8-9-7-21 0-28 7-21 8-9 0 0z" transform="rotate(300)"/></g><g stroke="#cc5500" stroke-width="1.2"><path d="M0 0V-13"/><path d="M0 0L-9-9"/><path d="M0 0L9-9"/></g><g fill="#cc5500"><circle cy="-14" r="2"/><circle cx="-9.5" cy="-9.5" r="2"/><circle cx="9.5" cy="-9.5" r="2"/></g></g></symbol><symbol id="da" viewBox="0 0 60 80"><path d="M30 34V78" stroke="#c46a2a" stroke-width="3" stroke-linecap="round"/><path d="M30 70C42 66 46 56 44 50c-10 4-14 12-14 20z" fill="#c46a2a"/><g transform="translate(30 30)"><g fill="#ffd45c" stroke="#e8a317" stroke-width=".8"><path d="M0 0C-8-8-7-19 0-25 7-19 8-8 0 0z" transform="rotate(0)"/><path d="M0 0C-8-8-7-19 0-25 7-19 8-8 0 0z" transform="rotate(60)"/><path d="M0 0C-8-8-7-19 0-25 7-19 8-8 0 0z" transform="rotate(120)"/><path d="M0 0C-8-8-7-19 0-25 7-19 8-8 0 0z" transform="rotate(180)"/><path d="M0 0C-8-8-7-19 0-25 7-19 8-8 0 0z" transform="rotate(240)"/><path d="M0 0C-8-8-7-19 0-25 7-19 8-8 0 0z" transform="rotate(300)"/></g><circle r="9" fill="#ff9f1c"/><circle r="5.5" fill="#cc5500"/></g></symbol></defs></svg><div class="fl" aria-hidden="true"><svg viewBox="0 0 60 80"><use href="#da"/></svg><svg viewBox="0 0 40 80"><use href="#tu"/></svg><svg viewBox="0 0 60 80"><use href="#li"/></svg><svg viewBox="0 0 60 80"><use href="#da"/></svg><svg viewBox="0 0 60 80"><use href="#li"/></svg><svg viewBox="0 0 40 80"><use href="#tu"/></svg><svg viewBox="0 0 60 80"><use href="#da"/></svg><svg viewBox="0 0 60 80"><use href="#li"/></svg><svg viewBox="0 0 40 80"><use href="#tu"/></svg></div>
+<div class="w"><header><h1>Danya's Coupon Book 🎟️</h1><p>26 coupons. No expiry date. Redeem anytime.</p><div class="hint">Scroll down ↓</div></header>
+<div class="bar" id="bar">Redeemed: <span id="cnt">0</span> of 26<div><b id="pb"></b></div></div>
+<div id="list"></div>
+<div class="end"><b>That's all 26 💗</b>Terms and conditions: I'm very easy to convince.</div></div>
+<div class="toast" id="toast"></div>
+<script>
+var C=[
+["One voice note, any topic","You choose what I talk about. I'll commit fully."],
+["A 10-minute call","No questions asked, no reason needed."],
+["A handwritten note","Written by hand, just for you, and sent as a photo."],
+["One song, one full review","You pick the song, I listen carefully and give my honest review."],
+["Bad day pass","I drop everything and cheer you up."],
+["Hype man mode","For one day, I cheer for everything you do like you just won a championship."],
+["Pick my lock screen","You choose my phone wallpaper for a week. I'll send proof."],
+["A tea date","We both make tea and chat on a call."],
+["Nickname power","You give me a nickname and I answer to it for a whole day."],
+["Win an argument","I lose on purpose. Use it wisely."],
+["Voice note in any accent","You choose the accent or character. I'll commit fully."],
+["Game night, your pick","You choose the game and the rules."],
+["Ask me anything","One question, any topic, and I'll answer honestly."],
+["A song dedicated to you","I'll pick it and tell you why."],
+["Send me on a quest","You give me a mission, like finding something blue or a silly challenge. I complete it and send proof."],
+["Photo of my day","On demand, whenever you ask."],
+["A custom meme about you","Made with love and zero professionalism."],
+["I'm right card","You are right about one thing. No debate."],
+["A call until you fall asleep","I'll stay as long as you need."],
+["A compliment attack","Ten compliments in a row, no breaks."],
+["A secret handshake","We invent one on video call and perfect it. Very serious business."],
+["A doodle of you","Bad art guaranteed. Sent with pride."],
+["Karaoke call","I'll sing, badly, for you."],
+["You choose my dinner","I'll send proof."],
+["A just-because surprise","You won't know until it arrives."],
+["Wildcard","Ask for anything, within reason and Wi-Fi range."]];
+var KEY="danya-coupons-v2",done={};try{done=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+var list=document.getElementById("list"),toast=document.getElementById("toast"),tt;
+function say(m){toast.textContent=m;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove("on")},3200)}
+function upd(){var n=Object.keys(done).length;document.getElementById("cnt").textContent=n;document.getElementById("pb").style.width=(n/26*100)+"%"}
+function send(i){var t="🎟️ Coupon #"+(i+1)+" redeemed: "+C[i][0];if(navigator.share){navigator.share({text:t}).catch(function(){})}else if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){say("Copied! Paste it in our chat 💗")},function(){say(t)})}else say(t)}
+C.forEach(function(c,i){var d=document.createElement("section");d.className="cp"+(done[i]?" done":"");
+d.innerHTML='<div class="num">'+(i+1)+'</div><h2></h2><p></p><button class="rd"></button><div class="st">REDEEMED</div>';
+d.querySelector("h2").textContent=c[0];d.querySelector("p").textContent=c[1];
+var b=d.querySelector(".rd");b.textContent=done[i]?"Send to him again 💌":"Redeem";
+b.addEventListener("click",function(){if(!done[i]){done[i]=1;try{localStorage.setItem(KEY,JSON.stringify(done))}catch(e){}d.classList.add("done");b.textContent="Send to him again 💌";upd();say("Redeemed! Now send it to him 💌")}send(i)});
+list.appendChild(d)});
+upd();
+try{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.15});document.querySelectorAll(".cp").forEach(function(c){io.observe(c)})}catch(e){document.querySelectorAll(".cp").forEach(function(c){c.classList.add("in")})}
+</script></body></html>
